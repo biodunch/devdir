@@ -1,0 +1,24 @@
+version: '2'
+services:
+    mysql:
+        container_name: collabo_mysql
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_USER: collabo
+            MYSQL_PASSWORD: p@55word1
+            MYSQL_DATABASE: collabo
+    app:
+        container_name: collabo_web_app
+        build: .
+        env_file: .env
+        ports:
+            - "7000:5000"
+        volumes: 
+            - .:/src
+        links:
+            - mysql
+        depends_on:
+            - mysql
