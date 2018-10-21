@@ -1,0 +1,36 @@
+{
+  "name": "DevDir",
+  "version": "1.0.0",
+  "description": "API for DevDir",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "linting": "node_modules/.bin/jscs .",
+    "fix-lint": "node_modules/.bin/jscs --fix ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biodunch/devdir.git"
+  },
+  "author": "Biodun Chris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/biodunch/devdir/issues"
+  },
+  "homepage": "https://github.com/biodunch/devdir#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "joi": "^13.1.2",
+    "mocha": "^5.2.0",
+    "mongoose": "^5.0.11",
+    "restify": "^7.0.0",
+    "restify-cors-middleware": "^1.1.0",
+    "restify-errors": "^6.0.0",
+    "restify-url-semver": "^1.1.1",
+    "supertest": "^3.3.0",
+    "winston": "^3.0.0-rc5"
+  },
+  "devDependencies": {
+    "cli-table": "^0.3.1"
+  }
+}
