@@ -31,6 +31,7 @@ class Database {
         });
 
         // initialize Models
+        require('app/models/Roles');
         require('app/models/Developers');
     }
 }

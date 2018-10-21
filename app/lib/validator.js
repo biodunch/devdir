@@ -1,7 +1,9 @@
 'use strict';
 
-let httpStatus = require('http-status');
-let errors = require('app/lib/errors/errors');
+const httpStatus = require('http-status');
+const serviceLocator = require('app/configs/di');
+const errors = serviceLocator.get('errs');
+// const errors = require('app/lib/errors/errors');
 
 /**
  * Header validation middleware definition

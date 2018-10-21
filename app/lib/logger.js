@@ -40,7 +40,7 @@ module.exports = {
      * @return {logger} Returns a new instance of the winston logger.
      */
     create: function(config) {
-        return new createLogger({
+        return createLogger({
             transports: createTransports(config),
             json: false,
             format: combine(
