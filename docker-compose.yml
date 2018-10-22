@@ -4,7 +4,7 @@ services:
         container_name: devdir_mongodb
         image: mongo
         ports:
-            - "27018:27017"
+            - "27017:27017"
     app:
         container_name: devdir_web_app
         build: .

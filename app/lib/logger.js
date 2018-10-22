@@ -3,10 +3,6 @@
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, prettyPrint } = format;
 
-/**
- * Creates transports based on config values
- * @returns {array} the created transports
- */
 const createTransports = function(config) {
     const customTransports = [];
 
@@ -34,17 +30,11 @@ const createTransports = function(config) {
 };
 
 module.exports = {
-    /**
-     * Creates a new logger instance using the config provided.
-     * @param  {object} config The config used to setup the logger transports.
-     * @return {logger} Returns a new instance of the winston logger.
-     */
     create: function(config) {
         return createLogger({
             transports: createTransports(config),
-            json: false,
             format: combine(
-                label({ label: 'Body101 MW' }),
+                label({ label: 'DevDir API' }),
                 timestamp(),
                 prettyPrint()
             )

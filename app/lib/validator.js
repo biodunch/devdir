@@ -75,7 +75,7 @@ module.exports.paramValidation = function(log, joi) {
 
                     res.send(
                         httpStatus.BAD_REQUEST,
-                        new errors.InvalidParamError('Missing request ' + i)
+                        new errors.MissingParameterError('Missing request ' + i)
                     );
                     return;
                 }
@@ -87,7 +87,7 @@ module.exports.paramValidation = function(log, joi) {
 
                     res.send(
                         httpStatus.BAD_REQUEST,
-                        new errors.InvalidParamError(
+                        new errors.MissingParameterError(
                             'Invalid request ' +
                                 i +
                                 ' - ' +

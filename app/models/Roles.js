@@ -15,7 +15,6 @@ const roleSchema = new mongoose.Schema(
             trim: true,
             unique: true,
             lowercase: true,
-            required: true
         }
     },
     {

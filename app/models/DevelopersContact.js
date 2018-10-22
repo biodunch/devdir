@@ -3,7 +3,7 @@
 const serviceLocator = require('app/lib/service_locator'),
     mongoose = serviceLocator.get('mongoose');
 
-const developerSchema = new mongoose.Schema(
+const developersContactSchema = new mongoose.Schema(
     {
         fullname: {
             type: String,
@@ -17,19 +17,24 @@ const developerSchema = new mongoose.Schema(
             lowercase: true,
             required: true
         },
-        twitter: {
+        phone_number: {
             type: String,
             trim: true,
             unique: true,
             lowercase: true,
             required: true
         },
+        twitter: {
+            type: String,
+            trim: true,
+            lowercase: true,
+            required: true
+        },
         github: {
             type: String,
             trim: true,
-            unique: true,
             lowercase: true,
-            required: true
+            required: false
         },
         role: {
             type: mongoose.Schema.Types.ObjectId,
@@ -41,4 +46,4 @@ const developerSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('Developers', developerSchema);
+module.exports = mongoose.model('DevelopersContact', developersContactSchema);
