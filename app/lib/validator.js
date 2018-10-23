@@ -1,7 +1,7 @@
 'use strict';
 
 const httpStatus = require('http-status');
-const serviceLocator = require('app/configs/di');
+const serviceLocator = require('../configs/di');
 const errors = serviceLocator.get('errs');
 // const errors = require('app/lib/errors/errors');
 

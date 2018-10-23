@@ -1,11 +1,13 @@
 'use strict';
 
-const serviceLocator = require('app/lib/service_locator'),
-    logger = serviceLocator.get('logger');
+const serviceLocator = require('../lib/service_locator'),
+    logger = serviceLocator.get('logger'),
+    configs = require('./configs')();
 
 class Database {
     constructor(port, host, name) {
         this.mongoose = serviceLocator.get('mongoose');
+        name = process.env.NODE_ENV === 'test' ? configs.mongo.testDb : name;
         this._connect(host, port, name);
     }
 
@@ -31,8 +33,8 @@ class Database {
         });
 
         // initialize Models
-        require('app/models/Roles');
-        require('app/models/DevelopersContact');
+        require('../models/Roles');
+        require('../models/DevelopersContact');
     }
 }
 

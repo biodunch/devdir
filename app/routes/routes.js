@@ -11,7 +11,7 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Create Developer Contact',
             version: '1.0.0',
             validation: {
-                body: require('app/validations/create_contact')
+                body: require('../validations/create_contact')
             }
         },
         (req, res, next) =>
@@ -50,7 +50,7 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Get A Contact',
             version: '1.0.0',
             validation: {
-                params: require('app/validations/get_contact')
+                params: require('../validations/get_contact')
             }
         },
         (req, res, next) =>
@@ -63,7 +63,7 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Update A Contact',
             version: '1.0.0',
             validation: {
-                body: require('app/validations/create_contact')
+                body: require('../validations/create_contact')
             }
         },
         (req, res, next) =>
@@ -78,7 +78,7 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Delete A Contact',
             version: '1.0.0',
             validation: {
-                params: require('app/validations/get_contact')
+                params: require('../validations/get_contact')
             }
         },
         (req, res, next) =>

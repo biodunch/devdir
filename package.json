@@ -4,8 +4,8 @@
   "description": "API for DevDir",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
-    "linting": "node_modules/.bin/jscs .",
+    "linting": "jscs .",
+    "test": "export NODE_ENV=test && cd app && mocha --timeout 10000",
     "fix-lint": "node_modules/.bin/jscs --fix ."
   },
   "repository": {
@@ -19,19 +19,21 @@
   },
   "homepage": "https://github.com/biodunch/devdir#readme",
   "dependencies": {
-    "chai": "^4.2.0",
+    "dotenv": "^6.1.0",
     "http-status": "^1.2.0",
     "joi": "^13.1.2",
-    "mocha": "^5.2.0",
     "mongoose": "^5.0.11",
     "restify": "^7.0.0",
     "restify-cors-middleware": "^1.1.0",
     "restify-errors": "^6.0.0",
     "restify-url-semver": "^1.1.1",
-    "supertest": "^3.3.0",
     "winston": "^3.0.0-rc5"
   },
   "devDependencies": {
-    "cli-table": "^0.3.1"
+    "chai": "^4.2.0",
+    "cli-table": "^0.3.1",
+    "jscs": "^3.0.7",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
   }
 }

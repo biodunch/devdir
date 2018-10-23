@@ -1,24 +1,25 @@
 'use strict';
+require('dotenv').config()
 
-const config = require('app/configs/configs')(),
+const config = require('./app/configs/configs')(),
     restify = require('restify'),
     versioning = require('restify-url-semver'),
     joi = require('joi'),
     // Require DI
-    serviceLocator = require('app/configs/di'),
-    validator = require('app/lib/validator'),
-    handler = require('app/routes/handlers'),
-    routes = require('app/routes/routes'),
+    serviceLocator = require('./app/configs/di'),
+    validator = require('./app/lib/validator'),
+    handler = require('./app/routes/handlers'),
+    routes = require('./app/routes/routes'),
     logger = serviceLocator.get('logger'),
     server = restify.createServer({
-        name: config.app.name,
+        name: config.app.name || 'DevDir',
         versions: ['1.0.0'],
         formatters: {
-            'application/json': require('app/lib/formatters/jsend')
+            'application/json': require('./app/lib/formatters/jsend')
         }
     }),
     // require and initialize the database
-    Database = require('app/configs/database');
+    Database = require('./app/configs/database');
 new Database(config.mongo.port, config.mongo.host, config.mongo.name);
 
 server.pre((req, res, next) => {
@@ -54,16 +55,19 @@ handler.register(server);
 
 // Setup route Handling
 routes.register(server, serviceLocator);
+const port = process.env.NODE_ENV == 'test' ? '8000' : config.app.port;
 
 // start server
-server.listen(config.app.port, () => {
-    logger.info(`${config.app.name} Server is running on ${config.app.port}`);
+server.listen(port, () => {
+    logger.info(`${config.app.name} Server is running on ${port}`);
 
     if (process.env.APPLICATION_ENV === 'development') {
-        require('app/lib/route_tables')(server.getDebugInfo().routes);
+        require('./app/lib/route_tables')(server.getDebugInfo().routes);
     }
 });
 
 process.on('unhandledRejection', (error) => {
     logger.error(error);
 });
+
+module.exports = server;

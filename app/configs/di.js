@@ -1,10 +1,10 @@
 'use strict';
 
-const serviceLocator = require('app/lib/service_locator'),
-    config = require('app/configs/configs')();
+const serviceLocator = require('../lib/service_locator'),
+    config = require('./configs')();
 
 serviceLocator.register('logger', () => {
-    const logger = require('app/lib/logger').create(config.application_logging);
+    const logger = require('../lib/logger').create(config.application_logging);
 
     return logger;
 });
@@ -22,7 +22,7 @@ serviceLocator.register('errs', () => {
 serviceLocator.register('rolesService', () => {
     const log = serviceLocator.get('logger');
     const mongoose = serviceLocator.get('mongoose');
-    const RolesService = require('app/services/roles');
+    const RolesService = require('../services/roles');
 
     return new RolesService(log, mongoose);
 });
@@ -32,7 +32,7 @@ serviceLocator.register('contactsService', () => {
     const mongoose = serviceLocator.get('mongoose');
     const errs = serviceLocator.get('errs');
     const rolesService = serviceLocator.get('rolesService');
-    const ContactsService = require('app/services/contacts');
+    const ContactsService = require('../services/contacts');
 
     return new ContactsService(rolesService, log, errs, mongoose);
 });
@@ -41,7 +41,7 @@ serviceLocator.register('contactsController', () => {
     const contactsService = serviceLocator.get('contactsService');
     const rolesService = serviceLocator.get('rolesService');
     const log = serviceLocator.get('logger');
-    const ContactsController = require('app/controllers/contacts');
+    const ContactsController = require('../controllers/contacts');
 
     return new ContactsController(contactsService, rolesService, log);
 });

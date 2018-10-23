@@ -87,14 +87,6 @@ class DevelopersService {
             'fullname twitter github phone_number email role -_id '
         ).populate('role', 'title -_id').exec();
 
-        if (!contacts) {
-            const err = new this.errs.NotFoundError(
-                'Developers contact were not found! Create It!'
-            );
-            this.log.error(err.message);
-            return err;
-        }
-
         this.log.info(`Developers contact fetched successfully `);
         return contacts;
     }
