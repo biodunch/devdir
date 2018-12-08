@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt-nodejs');
+
 module.exports = (sequelize, DataTypes) => {
     const Merchant = sequelize.define(
         'merchant',
@@ -35,6 +37,36 @@ module.exports = (sequelize, DataTypes) => {
             underscored: true
         }
     );
+
+    const encryptPasswordIfChanged = (merchant, options) => {
+        if (merchant.changed('password')) {
+            merchant.password_hash = bcrypt.hashSync(
+                merchant.password_hash,
+                bcrypt.genSaltSync(8),
+                null
+            );
+        }
+    };
+
+    Merchant.prototype.comparehash = (password) => {
+        return bcrypt.compareSync(password, this.password_hash);
+    }
+
+    Merchant.prototype.generateToken = async function(email) {
+        const token = await jwt.sign(
+            {
+                email
+            },
+            config.app.secret,
+            {
+                expiresIn: '24h'
+            }
+        );
+        return token;
+    };
+
+    Merchant.beforeCreate(encryptPasswordIfChanged);
+    Merchant.beforeUpdate(encryptPasswordIfChanged);
 
     Merchant.associate = function(models) {
         Merchant.hasOne(models.MerchantWallet);

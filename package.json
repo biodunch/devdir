@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/biodunch/collabo-be#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "chai": "^4.2.0",
     "http-status": "^1.2.0",
     "joi": "^13.1.2",

@@ -1,5 +1,5 @@
-const serviceLocator = require('app/config/di');
-const sequelize = serviceLocator.get('sequelize');
+const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
     const Affiliates = sequelize.define(
@@ -38,6 +38,36 @@ module.exports = (sequelize, DataTypes) => {
             underscored: true
         }
     );
+
+    const encryptPasswordIfChanged = (affiliate, options) => {
+        if (affiliate.changed('password')) {
+            affiliate.password_hash = bcrypt.hashSync(
+                affiliate.password_hash,
+                bcrypt.genSaltSync(8),
+                null
+            );
+        }
+    };
+
+    Affiliate.prototype.comparehash = (password) => {
+        return bcrypt.compareSync(password, this.password_hash);
+    };
+
+    Affiliate.prototype.generateToken = async function(email) {
+        const token = await jwt.sign(
+            {
+                email
+            },
+            config.app.secret,
+            {
+                expiresIn: '24h'
+            }
+        );
+        return token;
+    };
+
+    Affiliate.beforeCreate(encryptPasswordIfChanged);
+    Affiliate.beforeUpdate(encryptPasswordIfChanged);
 
     Affiliate.associate = function(models) {
         Affiliate.hasMany(models.AffiliateLink);
