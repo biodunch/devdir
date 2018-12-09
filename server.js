@@ -55,7 +55,7 @@ routes.register(server, serviceLocator);
 
 // start server
 server.listen(config.app.port, () => {
-    logger.info(`${config.app.name} Server is running`);
+    logger.info(`${config.app.name} Server is running on ${config.app.port}`);
 
     if (process.env.NODE_ENV === 'development') {
         require('app/lib/route_tables')(server.getDebugInfo().routes);

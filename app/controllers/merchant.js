@@ -4,12 +4,24 @@ class MerchantController {
         this.log = log;
     }
 
+    async createMerchant(req, res) {
+        try {
+            const { body } = req;
+            const result = await this.merchantService.create(body);
+            return res.send(result);
+        } catch (err) {
+            this.log.error(err.message);
+            return res.send(500, err);
+        }
+        
+    }
+
     async getMerchant(req, res) {
         try {
             const {
-                params: { merchant_id }
+                params: { id }
             } = req;
-            const result = await this.merchantService.fetchOne(merchant_id);
+            const result = await this.merchantService.fetchOne(id);
             return res.send(result);
         } catch (err) {
             this.log.error(err.message);

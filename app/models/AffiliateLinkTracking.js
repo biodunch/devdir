@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const AffiliateLinkTracking = sequelize.define(
-        'affiliateLinkTracking',
+        'AffiliateLinkTracking',
         {
             arrival_time: {
                 type: DataTypes.DATE,

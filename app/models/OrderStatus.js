@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const OrderStatus = sequelize.define(
-        'orderStatus',
+        'OrderStatus',
         {
             name: {
                 type: DataTypes.STRING,
@@ -20,4 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     OrderStatus.associate = function(models) {
         OrderStatus.hasMany(models.Order);
     };
+
+    return OrderStatus;
 };

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const MerchantWalletHistory = sequelize.define(
-        'merchantWalletHistory',
+        'MerchantWalletHistory',
         {
             transaction_type: {
                 type: DataTypes.STRING,

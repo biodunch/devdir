@@ -5,10 +5,36 @@ class AffiliateService {
         this.models = models;
     }
 
+    async create(body) {
+        const { email } = body;
+        const Affiliate = this.models.Affiliate;
+        let affiliate = await Affiliate.findOne({ where: { email } });
+
+        if (affiliate) {
+            const err = new this.errs.InvalidContentError(
+                'Affiliate with email already exists'
+            );
+            this.log.error(err.message);
+            return err;
+        }
+
+        body.password_hash = Affiliate.generateHash(body.password);
+        affiliate = await Affiliate.create(body);
+        await affiliate.createAffiliateWallet();
+        const token = await affiliate.generateToken(email);
+
+        this.log.info(
+            `Affiliate - ${affiliate.firstname} was created successfully `
+        );
+        return { affiliate, token };
+    }
+
     async fetchOne(affiliateId) {
         const Affiliate = this.models.Affiliate;
+        const Wallet = this.models.Wallet;
         const affiliate = await Affiliate.findOne({
             where: { id: affiliateId },
+            include: [Wallet]
         });
 
         if (!affiliate) {

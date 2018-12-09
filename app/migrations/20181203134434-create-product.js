@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('Product', {
+        return queryInterface.createTable('Products', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -55,11 +55,11 @@ module.exports = {
             merchant_id: {
                 type: Sequelize.INTEGER
             },
-            createdAt: {
+            created_at: {
                 allowNull: false,
                 type: Sequelize.DATE
             },
-            updatedAt: {
+            updated_at: {
                 allowNull: false,
                 type: Sequelize.DATE
             }
@@ -67,6 +67,6 @@ module.exports = {
     },
 
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('Product');
+        return queryInterface.dropTable('Products');
     }
 };

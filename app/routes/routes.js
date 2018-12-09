@@ -10,7 +10,7 @@ module.exports.register = (server, serviceLocator) => {
         },
         (req, res, next) =>
             serviceLocator
-                .get('authController')
+                .get('merchantController')
                 .createMerchant(req, res, next)
     );
 
@@ -25,7 +25,7 @@ module.exports.register = (server, serviceLocator) => {
         },
         (req, res, next) =>
             serviceLocator
-                .get('authController')
+                .get('affiliateController')
                 .createAffiliate(req, res, next)
     );
 

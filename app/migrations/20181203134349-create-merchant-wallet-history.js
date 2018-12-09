@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('MerchantWalletHistory', {
+        return queryInterface.createTable('MerchantWalletHistories', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -28,11 +28,11 @@ module.exports = {
             wallet_id: {
                 type: Sequelize.INTEGER
             },
-            createdAt: {
+            created_at: {
                 allowNull: false,
                 type: Sequelize.DATE
             },
-            updatedAt: {
+            updated_at: {
                 allowNull: false,
                 type: Sequelize.DATE
             }
@@ -40,6 +40,6 @@ module.exports = {
     },
 
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('MerchantWalletHistory');
+        return queryInterface.dropTable('MerchantWalletHistories');
     }
 };

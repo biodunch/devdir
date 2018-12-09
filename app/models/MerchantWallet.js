@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const MerchantWallet = sequelize.define(
-        'merchantWallet',
+        'MerchantWallet',
         {
             amount: {
                 type: DataTypes.INTEGER,

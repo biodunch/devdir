@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const AffiliateLink = sequelize.define(
-        'affiliateLink',
+        'AffiliateLink',
         {
             link: {
                 type: DataTypes.STRING,

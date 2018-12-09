@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
+const config = require('app/config/configs')();
 
 module.exports = (sequelize, DataTypes) => {
-    const Affiliates = sequelize.define(
-        'affiliate',
+    const Affiliate = sequelize.define(
+        'Affiliate',
         {
             firstname: {
                 type: DataTypes.STRING,
@@ -49,7 +50,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
 
-    Affiliate.prototype.comparehash = (password) => {
+    Affiliate.generateHash = function(password) {
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    };
+
+    Affiliate.prototype.compareHash = function(password) {
         return bcrypt.compareSync(password, this.password_hash);
     };
 
@@ -66,7 +71,6 @@ module.exports = (sequelize, DataTypes) => {
         return token;
     };
 
-    Affiliate.beforeCreate(encryptPasswordIfChanged);
     Affiliate.beforeUpdate(encryptPasswordIfChanged);
 
     Affiliate.associate = function(models) {
@@ -74,5 +78,5 @@ module.exports = (sequelize, DataTypes) => {
         Affiliate.hasOne(models.AffiliateWallet);
     };
 
-    return Affiliates;
+    return Affiliate;
 };

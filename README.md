@@ -1,3 +1,3 @@
-# DevDir
+# Collabo
 
 ### Setting up with Docker

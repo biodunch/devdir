@@ -20,7 +20,10 @@ serviceLocator.register('errs', () => {
 });
 
 serviceLocator.register('authService', () => {
-    const models = require('app/models');
+    const models = {
+        Affiliate: require('app/models').Affiliate,
+        Merchant: require('app/models').Merchant
+    };
     const log = serviceLocator.get('logger');
     const errs = serviceLocator.get('errs');
     const AuthService = require('app/services/auth');
@@ -29,7 +32,11 @@ serviceLocator.register('authService', () => {
 });
 
 serviceLocator.register('affiliateService', () => {
-    const models = require('app/models');
+    const models = {
+        Affiliate: require('app/models').Affiliate,
+        Merchant: require('app/models').Merchant,
+        Wallet: require('app/models').AffiliateWallet
+    };
     const log = serviceLocator.get('logger');
     const errs = serviceLocator.get('errs');
     const AffiliateService = require('app/services/affiliate');
@@ -38,7 +45,11 @@ serviceLocator.register('affiliateService', () => {
 });
 
 serviceLocator.register('merchantService', () => {
-    const models = require('app/models');
+    const models = {
+        Affiliate: require('app/models').Affiliate,
+        Merchant: require('app/models').Merchant,
+        Wallet: require('app/models').MerchantWallet
+    };
     const log = serviceLocator.get('logger');
     const errs = serviceLocator.get('errs');
     const MerchantService = require('app/services/merchant');

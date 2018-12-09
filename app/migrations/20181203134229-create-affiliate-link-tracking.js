@@ -2,7 +2,7 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('AffiliateLinkTracking', {
+        return queryInterface.createTable('AffiliateLinkTrackings', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
@@ -23,11 +23,11 @@ module.exports = {
             status_id: {
                 type: Sequelize.INTEGER
             },
-            createdAt: {
+            created_at: {
                 allowNull: false,
                 type: Sequelize.DATE
             },
-            updatedAt: {
+            updated_at: {
                 allowNull: false,
                 type: Sequelize.DATE
             }
@@ -35,6 +35,6 @@ module.exports = {
     },
 
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('AffiliateLinkTracking');
+        return queryInterface.dropTable('AffiliateLinkTrackings');
     }
 };

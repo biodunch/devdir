@@ -4,29 +4,17 @@ class AuthController {
         this.log = log;
     }
 
-    createMerchant(req, res) {
+    async basicLogin(req, res) {
         try {
             const { body } = req;
-            const result = await this.authService.create(body);
+            const result = await this.authService.login(body);
             return res.send(result);
         } catch (err) {
+            console.log(err);
             this.log.error(err.message);
             return res.send(500, err);
         }
     }
-
-    createAffiliate(req, res) {
-        try {
-            const { body } = req;
-            const result = await this.authService.create(body);
-            return res.send(result);
-        } catch (err) {
-            this.log.error(err.message);
-            return res.send(500, err);
-        }
-    }
-
-    basicLogin() {}
 
     getAffiliate() {}
 }

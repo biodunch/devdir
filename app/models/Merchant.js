@@ -1,8 +1,10 @@
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
+const config = require('app/config/configs')();
 
 module.exports = (sequelize, DataTypes) => {
     const Merchant = sequelize.define(
-        'merchant',
+        'Merchant',
         {
             firstname: {
                 type: DataTypes.STRING,
@@ -48,9 +50,13 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
 
-    Merchant.prototype.comparehash = (password) => {
+    Merchant.generateHash = (password) => {
+        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    };
+
+    Merchant.prototype.compareHash = (password) => {
         return bcrypt.compareSync(password, this.password_hash);
-    }
+    };
 
     Merchant.prototype.generateToken = async function(email) {
         const token = await jwt.sign(
@@ -65,7 +71,6 @@ module.exports = (sequelize, DataTypes) => {
         return token;
     };
 
-    Merchant.beforeCreate(encryptPasswordIfChanged);
     Merchant.beforeUpdate(encryptPasswordIfChanged);
 
     Merchant.associate = function(models) {

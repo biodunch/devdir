@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const AffiliateWalletHistory = sequelize.define(
-        'affiliateWalletHistory',
+        'AffiliateWalletHistory',
         {
             transaction_type: {
                 type: DataTypes.STRING,
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    AffiliateWalletHistory.associate = function(AffiliateWalletHistory) {
+    AffiliateWalletHistory.associate = function(models) {
         AffiliateWalletHistory.belongsTo(models.AffiliateWallet);
     };
 
