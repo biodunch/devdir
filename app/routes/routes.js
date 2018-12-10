@@ -1,3 +1,5 @@
+const middlewares = require('app/routes/middlewares');
+
 module.exports.register = (server, serviceLocator) => {
     server.post(
         {
@@ -5,7 +7,7 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Create a Merchant',
             version: '1.0.0',
             validation: {
-                // body: require('../validations/create_contact')
+                body: require('../validations/create_merchant')
             }
         },
         (req, res, next) =>
@@ -20,7 +22,7 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Create an Affiliate',
             version: '1.0.0',
             validation: {
-                // body: require('../validations/create_contact')
+                body: require('../validations/create_affiliate')
             }
         },
         (req, res, next) =>
@@ -35,13 +37,11 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Login',
             version: '1.0.0',
             validation: {
-                // body: require('../validations/create_contact')
+                body: require('../validations/basic_login')
             }
         },
         (req, res, next) =>
-            serviceLocator
-                .get('authController')
-                .basicLogin(req, res, next)
+            serviceLocator.get('authController').basicLogin(req, res, next)
     );
 
     server.get(
@@ -50,9 +50,10 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Get an Affiliate',
             version: '1.0.0',
             validation: {
-                // body: require('../validations/create_contact')
+                params: require('../validations/get_affiliate')
             }
         },
+        middlewares.verifyToken,
         (req, res, next) =>
             serviceLocator
                 .get('affiliateController')
@@ -65,12 +66,11 @@ module.exports.register = (server, serviceLocator) => {
             name: 'Get a Merchant',
             version: '1.0.0',
             validation: {
-                // body: require('../validations/create_contact')
+                params: require('../validations/get_merchant')
             }
         },
+        middlewares.verifyToken,
         (req, res, next) =>
-            serviceLocator
-                .get('merchantController')
-                .getMerchant(req, res, next)
+            serviceLocator.get('merchantController').getMerchant(req, res, next)
     );
 };

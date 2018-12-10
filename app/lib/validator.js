@@ -3,7 +3,6 @@
 const httpStatus = require('http-status');
 const serviceLocator = require('app/config/di');
 const errors = serviceLocator.get('errs');
-// const errors = require('app/lib/errors/errors');
 
 /**
  * Header validation middleware definition
@@ -75,7 +74,7 @@ module.exports.paramValidation = function(log, joi) {
 
                     res.send(
                         httpStatus.BAD_REQUEST,
-                        new errors.InvalidParamError('Missing request ' + i)
+                        new errors.MissingParameterError('Missing request ' + i)
                     );
                     return;
                 }
@@ -87,7 +86,7 @@ module.exports.paramValidation = function(log, joi) {
 
                     res.send(
                         httpStatus.BAD_REQUEST,
-                        new errors.InvalidParamError(
+                        new errors.MissingParameterError(
                             'Invalid request ' +
                                 i +
                                 ' - ' +
