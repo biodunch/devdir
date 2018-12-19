@@ -32,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
             password_hash: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            password_reset_token: {
+                type: DataTypes.STRING,
+                allowNull: true
             }
         },
         {
@@ -66,6 +70,19 @@ module.exports = (sequelize, DataTypes) => {
             config.app.secret,
             {
                 expiresIn: '24h'
+            }
+        );
+        return token;
+    };
+
+    Affiliate.prototype.generatePasswordResetToken = async function(email) {
+        const token = await jwt.sign(
+            {
+                email
+            },
+            config.app.secret,
+            {
+                expiresIn: '15m'
             }
         );
         return token;

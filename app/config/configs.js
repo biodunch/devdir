@@ -8,6 +8,9 @@ module.exports = () => ({
         logpath: process.env.LOG_PATH,
         secret: process.env.APP_SECRET
     },
+    pm: {
+        key: process.env.PM_KEY
+    },
     mysql: {
         password: process.env.DB_PASSWORD,
         username: process.env.DB_USERNAME,

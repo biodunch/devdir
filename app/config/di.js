@@ -19,6 +19,14 @@ serviceLocator.register('errs', () => {
     return require('restify-errors');
 });
 
+serviceLocator.register('emailService', () => {
+    const log = serviceLocator.get('logger');
+    const errs = serviceLocator.get('errs');
+    const EmailService = require('app/services/email');
+
+    return new EmailService(log, errs);
+});
+
 serviceLocator.register('authService', () => {
     const models = {
         Affiliate: require('app/models').Affiliate,
@@ -26,9 +34,10 @@ serviceLocator.register('authService', () => {
     };
     const log = serviceLocator.get('logger');
     const errs = serviceLocator.get('errs');
+    const emailService = serviceLocator.get('emailService');
     const AuthService = require('app/services/auth');
 
-    return new AuthService(log, errs, models);
+    return new AuthService(log, errs, models, emailService);
 });
 
 serviceLocator.register('affiliateService', () => {

@@ -44,6 +44,36 @@ module.exports.register = (server, serviceLocator) => {
             serviceLocator.get('authController').basicLogin(req, res, next)
     );
 
+    server.post(
+        {
+            path: '/forgot-password',
+            name: 'Forgot Password',
+            version: '1.0.0',
+            validation: {
+                body: require('../validations/forgot_password')
+            }
+        },
+        (req, res, next) =>
+            serviceLocator.get('authController').forgotPassword(req, res, next)
+    );
+
+
+    server.put(
+        {
+            path: '/change-password',
+            name: 'Change Password',
+            version: '1.0.0',
+            validation: {
+                // body: require('../validations/forgot-password')
+            }
+        },
+        middlewares.verifyToken,
+        (req, res, next) =>
+            serviceLocator
+                .get('authController')
+                .requestNewPassword(req, res, next)
+    );
+
     server.get(
         {
             path: '/affiliates/:id',

@@ -16,7 +16,44 @@ class AuthController {
         }
     }
 
-    getAffiliate() {}
+    async forgotPassword(req, res) {
+        try {
+            const {
+                body: { email, kind }
+            } = req;
+            const result = await this.authService.generatePasswordResetLink(
+                email,
+                kind
+            );
+            return res.send(result);
+        } catch (err) {
+            console.log(err);
+            this.log.error(err.message);
+            return res.send(500, err);
+        }
+    }
+
+    async requestNewPassword(req, res) {
+        try {
+            const {
+                body: { new_password, kind },
+                query: { token },
+                user: { email }
+            } = req;
+            const result = await this.authService.changePassword(
+                email,
+                kind,
+                new_password,
+                token
+            );
+
+            return res.send(result);
+        } catch (err) {
+            console.log(err);
+            this.log.error(err.message);
+            return res.send(500, err);
+        }
+    }
 }
 
 module.exports = AuthController;

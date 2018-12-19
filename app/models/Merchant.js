@@ -32,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
             password_hash: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            password_reset_token: {
+                type: DataTypes.STRING,
+                allowNull: true
             }
         },
         {
@@ -50,11 +54,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
 
-    Merchant.generateHash = (password) => {
+    Merchant.generateHash = function(password) {
         return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     };
 
-    Merchant.prototype.compareHash = (password) => {
+    Merchant.prototype.compareHash = function(password) {
         return bcrypt.compareSync(password, this.password_hash);
     };
 
@@ -66,6 +70,19 @@ module.exports = (sequelize, DataTypes) => {
             config.app.secret,
             {
                 expiresIn: '24h'
+            }
+        );
+        return token;
+    };
+
+    Merchant.prototype.generatePasswordResetToken = async function(email) {
+        const token = await jwt.sign(
+            {
+                email
+            },
+            config.app.secret,
+            {
+                expiresIn: '5m'
             }
         );
         return token;
