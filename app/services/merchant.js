@@ -26,7 +26,7 @@ class MerchantService {
         this.log.info(
             `Merchant - ${merchant.firstname} was created successfully `
         );
-        return { merchant, token };
+        return "success";
     }
 
     async fetchOne(merchant_id) {
@@ -35,7 +35,8 @@ class MerchantService {
         const Wallet = this.models.Wallet;
         const merchant = await Merchant.findOne({
             where: { id: merchant_id },
-            include: [Wallet]
+            include: [Wallet],
+            attributes: ['id', 'firstname', 'lastname', 'email', 'phone']
         });
 
         if (!merchant) {

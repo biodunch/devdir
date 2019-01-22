@@ -12,7 +12,7 @@ services:
             MYSQL_DATABASE: collabo
     app:
         container_name: collabo_web_app
-        build: .
+        build: ./docker/development
         env_file: .env
         ports:
             - "7000:5000"

@@ -12,7 +12,9 @@ class AuthService {
         let model = await Model.findOne({ where: { email } });
 
         if (!model) {
-            const err = new this.errs.NotFoundError(Model.name + " doesn't exists");
+            const err = new this.errs.NotFoundError(
+                Model.name + " doesn't exists"
+            );
             this.log.error(err.message);
             return err;
         }
@@ -45,7 +47,6 @@ class AuthService {
         const passwordResetToken = await model.generatePasswordResetToken(
             email
         );
-        console.log(passwordResetToken);
         model.password_reset_token = passwordResetToken;
         await model.save();
         const message = `To reset your password, click on this link: https://collabo.ng/reset-password/${passwordResetToken}`;
@@ -59,7 +60,9 @@ class AuthService {
 
     async changePassword(email, kind, newPassword, passwordResetToken) {
         const Model = this.models[kind];
-        const model = await Model.findOne({ where: { email } });
+        const model = await Model.findOne({
+            where: { email }
+        });
 
         if (!model) {
             const err = new this.errs.NotFoundError("Affiliate doesn't exists");

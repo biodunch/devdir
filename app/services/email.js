@@ -12,7 +12,7 @@ class EmailService {
 
         client.sendEmail({
             From: 'hello@collabo.ng',
-            To: 'email', // email
+            To: email,
             Subject: subject,
             TextBody: message
         });

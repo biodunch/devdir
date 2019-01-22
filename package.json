@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/biodunch/collabo-be#readme",
   "dependencies": {
+    "algoliasearch": "^3.32.0",
     "bcrypt-nodejs": "0.0.3",
     "chai": "^4.2.0",
     "http-status": "^1.2.0",
@@ -27,6 +28,8 @@
     "mocha": "^5.2.0",
     "mongoose": "^5.0.11",
     "mysql2": "^1.6.4",
+    "nodemailer": "^4.7.0",
+    "postmark": "^2.2.3",
     "restify": "^7.0.0",
     "restify-cors-middleware": "^1.1.0",
     "restify-errors": "^6.0.0",

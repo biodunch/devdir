@@ -8,16 +8,16 @@
     },
     "test": {
         "username": "collabo",
-        "password": "p@55word1",
-        "database": "collabo",
-        "host": "collabo_mysql",
+        "password": "pa55word1",
+        "database": "collabodb",
+        "host": "collabo-db.ckt2w0qkx1mw.us-east-1.rds.amazonaws.com",
         "dialect": "mysql"
     },
     "production": {
-        "username": "root",
-        "password": null,
-        "database": "database_production",
-        "host": "127.0.0.1",
+        "username": "collabo",
+        "password": "pa55word1",
+        "database": "collabodb",
+        "host": "collabo-db.ckt2w0qkx1mw.us-east-1.rds.amazonaws.com",
         "dialect": "mysql"
     }
 }

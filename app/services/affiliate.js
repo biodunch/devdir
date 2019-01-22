@@ -26,7 +26,7 @@ class AffiliateService {
         this.log.info(
             `Affiliate - ${affiliate.firstname} was created successfully `
         );
-        return { affiliate, token };
+        return "success";
     }
 
     async fetchOne(affiliateId) {
@@ -34,7 +34,8 @@ class AffiliateService {
         const Wallet = this.models.Wallet;
         const affiliate = await Affiliate.findOne({
             where: { id: affiliateId },
-            include: [Wallet]
+            include: [Wallet],
+            attributes: ['id', 'firstname', 'lastname', 'email', 'phone']
         });
 
         if (!affiliate) {
