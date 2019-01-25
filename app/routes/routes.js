@@ -103,4 +103,17 @@ module.exports.register = (server, serviceLocator) => {
         (req, res, next) =>
             serviceLocator.get('merchantController').getMerchant(req, res, next)
     );
+
+    server.post(
+        {
+            path: '/waitlist/:list_token',
+            name: 'Join Waitlist',
+            version: '1.0.0'
+            // validation: {
+            //     params: require('../validations/get_merchant')
+            // }
+        },
+        (req, res, next) =>
+            serviceLocator.get('merchantController').getMerchant(req, res, next)
+    );
 };

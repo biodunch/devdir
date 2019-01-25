@@ -22,6 +22,7 @@
     "algoliasearch": "^3.32.0",
     "bcrypt-nodejs": "0.0.3",
     "chai": "^4.2.0",
+    "hashids": "^1.2.2",
     "http-status": "^1.2.0",
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.4.0",

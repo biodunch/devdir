@@ -26,7 +26,7 @@ class AffiliateService {
         this.log.info(
             `Affiliate - ${affiliate.firstname} was created successfully `
         );
-        return "success";
+        return "Account Created Successfully";
     }
 
     async fetchOne(affiliateId) {

@@ -26,7 +26,7 @@ class MerchantService {
         this.log.info(
             `Merchant - ${merchant.firstname} was created successfully `
         );
-        return "success";
+        return "Account Created Successfully";
     }
 
     async fetchOne(merchant_id) {

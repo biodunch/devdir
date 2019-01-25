@@ -19,12 +19,30 @@ serviceLocator.register('errs', () => {
     return require('restify-errors');
 });
 
+serviceLocator.register('hashids', () => {
+    const Hashids = require('hashids');
+    return new Hashids(config.app.name);
+});
+
 serviceLocator.register('emailService', () => {
     const log = serviceLocator.get('logger');
     const errs = serviceLocator.get('errs');
     const EmailService = require('app/services/email');
 
     return new EmailService(log, errs);
+});
+
+serviceLocator.register('waitListService', () => {
+    const models = {
+        WaitList: require('app/models').WaitList,
+    };
+    const log = serviceLocator.get('logger');
+    const errs = serviceLocator.get('errs');
+    const emailService = serviceLocator.get('emailService');
+    const hashids = serviceLocator.get('hashids');
+    const WaitListService = require('app/services/waitlist');
+
+    return new WaitListService(log, errs, models, emailService, hashids);
 });
 
 serviceLocator.register('authService', () => {
@@ -64,6 +82,14 @@ serviceLocator.register('merchantService', () => {
     const MerchantService = require('app/services/merchant');
 
     return new MerchantService(log, errs, models);
+});
+
+serviceLocator.register('waitListController', () => {
+    const log = serviceLocator.get('logger');
+    const waitListService = serviceLocator.get('waitListService');
+    const WaitListController = require('app/controllers/waitlist');
+
+    return new WaitListController(waitListService, log);
 });
 
 serviceLocator.register('authController', () => {

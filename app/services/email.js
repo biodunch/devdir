@@ -16,8 +16,6 @@ class EmailService {
             Subject: subject,
             TextBody: message
         });
-
-        return 'success';
     }
 }
 
